@@ -7,20 +7,20 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class User {
     @Id
-    int id;
+    Long id;
     String name = "";
-    @Generated(hash = 1332540676)
-    public User(int id, String name) {
+    @Generated(hash = 873297011)
+    public User(Long id, String name) {
         this.id = id;
         this.name = name;
     }
     @Generated(hash = 586692638)
     public User() {
     }
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

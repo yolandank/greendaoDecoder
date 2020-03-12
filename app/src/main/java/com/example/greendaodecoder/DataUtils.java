@@ -4,6 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.greendaodecoder.data.User;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import arcturis.greendao.DaoMaster;
 import arcturis.greendao.DaoSession;
 import arcturis.greendao.UserDao;
@@ -50,7 +52,7 @@ public class DataUtils {
         userDao.insert(item);
     }
 
-    public void removeItem(int id) {
+    public void removeItem(long id) {
         UserDao userDao = mDaoSession.getUserDao();
         userDao.deleteByKeyInTx(id);
     }

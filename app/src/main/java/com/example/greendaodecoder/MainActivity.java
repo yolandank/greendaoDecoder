@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         User user = new User();
-        user.setId(12);
+        user.setId(12L);
         user.setName("renwj");
         DataUtils.getInstance().addItem(user);
     }
