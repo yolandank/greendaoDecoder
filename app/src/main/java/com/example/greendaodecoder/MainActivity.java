@@ -1,10 +1,11 @@
 package com.example.greendaodecoder;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
-import com.example.greendaodecoder.data.User;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,10 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        User user = new User();
-        user.setId(12L);
-        user.setName("renwj");
-        DataUtils.getInstance().addItem(user);
+
     }
 
 
@@ -23,5 +21,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         DataUtils.getInstance().removeItem(12);
+    }
+
+    private static final String TAG = "MainActivity";
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Log.d(TAG, "dispatchKeyEvent: ");
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "onTouchEvent: ");
+        return super.onTouchEvent(event);
     }
 }

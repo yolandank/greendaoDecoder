@@ -1,10 +1,10 @@
 package com.example.greendaodecoder;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 
 import com.example.greendaodecoder.data.User;
 
-import org.greenrobot.greendao.query.QueryBuilder;
 
 import arcturis.greendao.DaoMaster;
 import arcturis.greendao.DaoSession;
