@@ -7,13 +7,17 @@ import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.greendaodecoder.concurrent.FutureDemo;
+import com.example.greendaodecoder.concurrent.FutureTaskDemo;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //FutureDemo.getInstance().run();
+        FutureTaskDemo.getInstance().run();
     }
 
 
