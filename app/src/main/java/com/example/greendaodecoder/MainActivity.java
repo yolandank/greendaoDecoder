@@ -7,8 +7,7 @@ import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.greendaodecoder.concurrent.FutureDemo;
-import com.example.greendaodecoder.concurrent.FutureTaskDemo;
+import com.example.greendaodecoder.concurrent.BlockingQueueDemo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,8 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //FutureDemo.getInstance().run();
-        FutureTaskDemo.getInstance().run();
+        BlockingQueueDemo.getInstance().run();
     }
 
 
