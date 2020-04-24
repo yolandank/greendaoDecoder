@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.greendaodecoder.concurrent.BlockingQueueDemo;
+import com.example.greendaodecoder.concurrent.SemaphoreDemo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +15,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BlockingQueueDemo.getInstance().run();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SemaphoreDemo.getInstance().run();
+            }
+        }).start();
+
     }
 
 

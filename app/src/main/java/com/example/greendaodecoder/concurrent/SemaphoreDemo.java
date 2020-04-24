@@ -1,0 +1,139 @@
+package com.example.greendaodecoder.concurrent;
+
+import android.util.Log;
+
+import java.util.concurrent.Semaphore;
+
+public class SemaphoreDemo {
+    private static volatile SemaphoreDemo instance;
+
+    private SemaphoreDemo() {
+
+    }
+
+    public static SemaphoreDemo getInstance() {
+        if (instance == null) {
+            synchronized (SemaphoreDemo.class) {
+                if (instance == null) {
+                    instance = new SemaphoreDemo();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private static final String TAG = "SemaphoreDemo";
+
+    public void run() {
+        //new Semaphore(permits)：初始化许可证数量的构造函数
+        Semaphore semaphore = new Semaphore(5);
+
+        //new Semaphore(permits,fair):初始化许可证数量和是否公平模式的构造函数
+        semaphore = new Semaphore(5, true);
+
+        //isFair()：是否公平模式FIFO
+        Log.d(TAG, "是否公平FIFO：" + semaphore.isFair());
+
+        //availablePermits():获取当前可用的许可证数量
+        Log.d(TAG, "获取当前可用的许可证数量：开始---" + semaphore.availablePermits());
+
+        //acquire():获取1个许可证
+        //---此线程会一直阻塞，直到获取这个许可证，或者被中断(抛出InterruptedException异常)。
+
+        try {
+            semaphore.acquire();
+            Log.d(TAG, "获取当前可用的许可证数量：acquire 1 个---" + semaphore.availablePermits());
+
+            //release()：释放1个许可证
+            semaphore.release();
+            Log.d(TAG, "获取当前可用的许可证数量：release 1 个---" + semaphore.availablePermits());
+
+            //acquire(permits):获取n个许可证
+            //---此线程会一直阻塞，直到获取全部n个许可证,或者被中断(抛出InterruptedException异常)。
+            semaphore.acquire(2);
+            Log.d(TAG, "获取当前可用的许可证数量：acquire 2 个---" + semaphore.availablePermits());
+
+            //release(permits):释放n个许可证
+            semaphore.release(2);
+            Log.d(TAG, "获取当前可用的许可证数量：release 1 个---" + semaphore.availablePermits());
+
+            //hasQueuedThreads():是否有正在等待许可证的线程
+            Log.d(TAG, "是否有正在等待许可证的线程：" + semaphore.hasQueuedThreads());
+
+            //getQueueLength():正在等待许可证的队列长度(线程数量)
+            Log.d(TAG, "正在等待许可证的队列长度(线程数量)：" + semaphore.getQueueLength());
+
+            Thread.sleep(10);
+
+            //定义final的信号量
+            final Semaphore finalSemaphore = semaphore;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //drainPermits():获取剩余的所有的许可证
+                    int permits = finalSemaphore.drainPermits();
+                    Log.d(TAG, Thread.currentThread().getName() + "获取了剩余的全部" + permits + "个许可证.");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //释放所有的许可证
+                    finalSemaphore.release(permits);
+                    Log.d(TAG, Thread.currentThread().getName() + "释放了" + permits + "个许可证.");
+                }
+            }).start();
+
+            Thread.sleep(10);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //有一个线程正在等待获取1个许可证
+                        finalSemaphore.acquire();
+                        Log.d(TAG, Thread.currentThread().getName() + "获取了1个许可证.");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //释放1个许可证
+                    finalSemaphore.release();
+                    Log.d(TAG, Thread.currentThread().getName() + "释放了1个许可证.");
+
+                }
+            }).start();
+            Thread.sleep(10);
+            Log.d(TAG, "获取当前可用的许可证数量：drain 剩余的---" + finalSemaphore.availablePermits());
+            Log.d(TAG, "是否有正在等待许可证的线程：" + finalSemaphore.hasQueuedThreads());
+            Log.d(TAG, "正在等待许可证的队列长度(线程数量)：" + finalSemaphore.getQueueLength());
+
+            Thread.sleep(10);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //有一个线程正在等待获取2个许可证
+                        finalSemaphore.acquire(2);
+                        Log.d(TAG, Thread.currentThread().getName() + "获取了2个许可证.");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //释放两个许可证
+                    finalSemaphore.release(2);
+                    Log.d(TAG, Thread.currentThread().getName() + "释放了2个许可证.");
+                }
+            }).start();
+            Thread.sleep(10);
+            Log.d(TAG, "获取当前可用的许可证数量：drain 剩余的---" + finalSemaphore.availablePermits());
+            Log.d(TAG, "是否有正在等待许可证的线程：" + finalSemaphore.hasQueuedThreads());
+            Log.d(TAG, "正在等待许可证的队列长度(线程数量)：" + finalSemaphore.getQueueLength());
+
+            Thread.sleep(5000);
+
+            Log.d(TAG, "获取当前可用的许可证数量：---" + finalSemaphore.availablePermits());
+            Log.d(TAG, "是否有正在等待许可证的线程：" + finalSemaphore.hasQueuedThreads());
+            Log.d(TAG, "正在等待许可证的队列长度(线程数量)：" + finalSemaphore.getQueueLength());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
