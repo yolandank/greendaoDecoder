@@ -1,90 +1,43 @@
 package com.example.greendaodecoder;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.greendaodecoder.web.WebViewDemo;
 
 
 public class MainActivity extends AppCompatActivity {
     WebView mWebview;
-    WebSettings mWebSettings;
-    TextView beginLoading,endLoading,loading,mtitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        mWebview = (WebView) findViewById(R.id.webView1);
-        beginLoading = (TextView) findViewById(R.id.text_beginLoading);
-        endLoading = (TextView) findViewById(R.id.text_endLoading);
-        loading = (TextView) findViewById(R.id.text_Loading);
-        mtitle = (TextView) findViewById(R.id.title);
-
-        mWebSettings = mWebview.getSettings();
-        mWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-        mWebview.loadUrl("http://www.baidu.com/");
-
-
-        //设置不用系统浏览器打开,直接显示在当前Webview
-        mWebview.setWebViewClient(new WebViewClient() {
+        setContentView(R.layout.webview_demo_layout);
+        FrameLayout webViewContainer = findViewById(R.id.webview_container);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mWebview = WebViewDemo.getInstance().getWebView(this);
+        webViewContainer.addView(mWebview, params);
+        TextView callJsFunction = findViewById(R.id.call_js_function_no_param);
+        callJsFunction.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+            public void onClick(View v) {
+                mWebview.loadUrl("javascript:javacalljs()");
             }
         });
-
-        //设置WebChromeClient类
-        mWebview.setWebChromeClient(new WebChromeClient() {
-
-
-            //获取网站标题
+        TextView callJsFunctionWithParam = findViewById(R.id.call_js_function_with_param);
+        callJsFunctionWithParam.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onReceivedTitle(WebView view, String title) {
-                System.out.println("标题在这里");
-                mtitle.setText(title);
-            }
-
-
-            //获取加载进度
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress < 100) {
-                    String progress = newProgress + "%";
-                    loading.setText(progress);
-                } else if (newProgress == 100) {
-                    String progress = newProgress + "%";
-                    loading.setText(progress);
-                }
-            }
-        });
-
-
-        //设置WebViewClient类
-        mWebview.setWebViewClient(new WebViewClient() {
-            //设置加载前的函数
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                System.out.println("开始加载了");
-                beginLoading.setText("开始加载了");
-            }
-
-            //设置结束加载函数
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                endLoading.setText("结束加载了");
+            public void onClick(View v) {
+                String data = "红毛浮绿水";
+                mWebview.loadUrl("javascript:javacalljswithargs('" + data + "')");
             }
         });
     }

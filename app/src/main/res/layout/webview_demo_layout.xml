@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:paddingLeft="50dp"
+    android:paddingTop="100dp"
+    android:paddingRight="50dp"
+    android:paddingBottom="100dp"
+    tools:context="com.example.greendaodecoder.MainActivity">
+
+    <TextView
+        android:id="@+id/call_js_function_no_param"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginEnd="100dp"
+        android:text="调用无参js函数" />
+
+    <TextView
+        android:id="@+id/call_js_function_with_param"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_toEndOf="@+id/call_js_function_no_param"
+        android:text="调用有参数js函数" />
+    <!--显示网页区域-->
+    <FrameLayout
+        android:id="@+id/webview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp" />
+</RelativeLayout>
