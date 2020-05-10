@@ -8,7 +8,7 @@
     android:paddingTop="100dp"
     android:paddingRight="50dp"
     android:paddingBottom="100dp"
-    tools:context="com.example.greendaodecoder.MainActivity">
+    tools:context="com.example.greendaodecoder.WebViewActivity">
 
     <TextView
         android:id="@+id/call_js_function_no_param"

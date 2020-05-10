@@ -1,9 +1,8 @@
-package com.example.greendaodecoder;
+package com.example.greendaodecoder.data;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Handler;
 
-import com.example.greendaodecoder.data.User;
+import com.example.greendaodecoder.DemoApp;
 
 
 import arcturis.greendao.DaoMaster;

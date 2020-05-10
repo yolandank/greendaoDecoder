@@ -14,13 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.greendaodecoder.web.WebViewDemo;
 
 
-public class MainActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity {
     WebView mWebview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.webview_demo_layout);
+        setContentView(R.layout.webview_activity_layout);
         FrameLayout webViewContainer = findViewById(R.id.webview_container);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mWebview = WebViewDemo.getInstance().getWebView(this);

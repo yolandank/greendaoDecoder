@@ -1,20 +1,10 @@
-package com.example.greendaodecoder;
+package com.example.greendaodecoder.retroft;
 
-
-import com.example.greendaodecoder.data.User;
-import com.example.greendaodecoder.retroft.GrabService;
-import com.example.greendaodecoder.retroft.Repo;
-
-import java.io.IOException;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
 
 public class RetrofitUtils {
 

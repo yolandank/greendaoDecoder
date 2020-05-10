@@ -14,8 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".WebViewActivity">
+
+        </activity>
+        <activity android:name=".Adapt1Activity" >
+
+        </activity>
+        <activity android:name=".Adapt2Activity" />
+        <activity android:name=".DialogActivity"
+            android:launchMode="standard"
+            >
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
