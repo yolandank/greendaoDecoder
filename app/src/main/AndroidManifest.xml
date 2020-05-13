@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:name=".DemoApp"
@@ -17,13 +18,13 @@
         <activity android:name=".WebViewActivity">
 
         </activity>
-        <activity android:name=".Adapt1Activity" >
+        <activity android:name=".Adapt1Activity">
 
         </activity>
         <activity android:name=".Adapt2Activity" />
-        <activity android:name=".DialogActivity"
-            android:launchMode="standard"
-            >
+        <activity
+            android:name=".DialogActivity"
+            android:launchMode="standard">
             <intent-filter>
 
                 <action android:name="android.intent.action.MAIN" />

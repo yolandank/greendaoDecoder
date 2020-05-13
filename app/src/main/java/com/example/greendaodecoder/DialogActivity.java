@@ -2,7 +2,6 @@ package com.example.greendaodecoder;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,20 +9,37 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.greendaodecoder.tools.CommonUtils;
 import com.example.greendaodecoder.volley.VolleyDemo;
 
-public class DialogActivity extends AppCompatActivity implements View.OnClickListener {
+public class DialogActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "DialogActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.dialog_activity_layout);
         Log.d(TAG, "onCreate: ");
-        TextView showDialog=findViewById(R.id.show_dialog);
+        TextView showDialog = findViewById(R.id.show_dialog);
         showDialog.setOnClickListener(this);
         VolleyDemo.getInstance().run();
+
+        LeakThread leakThread = new LeakThread();
+        leakThread.start();
+        CommonUtils.getInstance(this);
+    }
+
+    static class LeakThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(6 * 60 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -58,8 +74,8 @@ public class DialogActivity extends AppCompatActivity implements View.OnClickLis
                 .setPositiveButton("跳转", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent=new Intent();
-                        intent.setClass(DialogActivity.this,DialogActivity.class);
+                        Intent intent = new Intent();
+                        intent.setClass(DialogActivity.this, DialogActivity.class);
                         DialogActivity.this.startActivity(intent);
                     }
                 })
