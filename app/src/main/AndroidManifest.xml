@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".Adapt2Activity" />
         <activity
-            android:name=".DialogActivity"
+            android:name=".jetpack.JetpackActivity"
             android:launchMode="standard">
             <intent-filter>
 

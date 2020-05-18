@@ -29,5 +29,6 @@ public class Adapt1Activity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         AdaptScreenUtil.printCurrentDensity(this,this.getClass().getSimpleName());
+
     }
 }
