@@ -2,13 +2,18 @@ package com.example.greendaodecoder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.greendaodecoder.adaptscreen.AdaptScreenUtil;
+import com.example.greendaodecoder.jetpack.MyViewModel;
 
 public class Adapt2Activity extends AppCompatActivity {
     @Override
