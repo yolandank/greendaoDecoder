@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.greendaodecoder.adaptscreen.AdaptScreenUtil;
+import com.example.greendaodecoder.glide.GlideApp;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -26,6 +27,7 @@ public class DemoApp extends Application {
         }
         sRefWatcher = LeakCanary.install(this);
         sHandler=new Handler(Looper.getMainLooper());
+        GlideApp.get(this);
     }
 
     private static RefWatcher sRefWatcher;

@@ -1,16 +1,10 @@
 package com.example.greendaodecoder.jetpack;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingComponent;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.adapters.TextViewBindingAdapter;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.work.BackoffPolicy;
